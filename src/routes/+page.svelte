@@ -117,7 +117,7 @@
 
     <button class="nav-icon cart" on:click={openCart}></button>
 
-    <img class="nav-icon" src={userProfileSrc} on:keydown on:click={openProfile} alt="A candid shot of yourself!" />
+    <img class="nav-icon" src={userProfileSrc} on:keydown on:click={openProfile} alt="Your profile!" />
 
     {#if sideNav}
     <div id="sidenav">
