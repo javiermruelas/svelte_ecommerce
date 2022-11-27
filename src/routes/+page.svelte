@@ -15,6 +15,8 @@
     export let userProfileSrc: string = '';
     export let userCart: any[] = [];
 
+    let itemCounter: number = 0;
+
     function checkMobile():void {
        isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
     }
@@ -55,6 +57,16 @@
         userName = user.user_name;
         userProfileSrc = '/images/' + user.user_profile_image_source;
         userCart = user.user_cart;
+    }
+
+    function addItem() {
+        itemCounter++;
+    }
+
+    function subtractItem() {
+        if (itemCounter - 1 < 0) return;
+
+        itemCounter--;
     }
 
     onMount(async () => {
@@ -111,9 +123,9 @@
     
     <div class="flex-group-row">
         <div class="product-counter flex-group-row">
-            <button>-</button>
-            <div>0</div>
-            <button>+</button>
+            <button on:click={subtractItem}>-</button>
+            <div>{ itemCounter }</div>
+            <button on:click={addItem}>+</button>
         </div>
         <button><span class="icon cart"></span>Add to cart</button>
     </div>
