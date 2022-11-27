@@ -1,4 +1,7 @@
-{
-    "user": "James Green",
-    "profile_image_source": "image-avatar.png"
-}
+[
+    {
+        "user_name": "James Green",
+        "user_profile_image_source": "image-avatar.png",
+        "user_cart": []
+    }
+]
