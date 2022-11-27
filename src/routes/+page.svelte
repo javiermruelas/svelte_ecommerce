@@ -15,8 +15,6 @@
     export let userProfileSrc: string = '';
     export let userCart: any[] = [];
 
-    let itemCounter: number = 0;
-
     function checkMobile():void {
        isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
     }
@@ -59,6 +57,16 @@
         userCart = user.user_cart;
     }
 
+    onMount(async () => {
+        checkMobile();
+        const products = await fetchProductData();
+        setProductData(products);
+        const users = await fetchUserData();
+        setUserData(users);
+	});
+
+    let itemCounter: number = 0;
+
     function addItem() {
         itemCounter++;
     }
@@ -69,31 +77,60 @@
         itemCounter--;
     }
 
-    onMount(async () => {
-        checkMobile();
-        const products = await fetchProductData();
-        setProductData(products);
-        const users = await fetchUserData();
-        setUserData(users);
-	});
+    let sideNav: boolean = false;
+
+    function openSideNav(): void {
+        sideNav = true;
+    }
+
+    function closeSideNav(): void {
+        sideNav = false;
+    }
+
+    function openCart():void {
+        console.log('todo');
+    }
+    
+    function openProfile():void {
+        console.log('todo');
+    }
+
+    function scrollLeft(): void {
+        console.log('todo');
+    }
+
+    function scrollRight(): void {
+        console.log('todo');
+    }
 </script>
 
+
 {#if isMobile}
-<div class="mobile-nav-toggle">
-    <div class="icon menu"></div>
-    <div class="icon close"></div>
-</div>
-
-<img src="/images/logo.svg" alt="sneakers logo" />
-
 <nav id="mobile-nav-main">
-    <ul>
-        <li><a href="/">Collections</a></li>
-        <li><a href="/men">Men</a></li>
-        <li><a href="/women">Women</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
+    {#if !sideNav}
+    <div class="mobile-nav-toggle">
+        <button class="icon menu" on:click={openSideNav}></button>
+    </div>
+    {/if}
+    
+    <img src="/images/logo.svg" alt="sneakers logo" />
+
+    <button class="nav-icon cart" on:click={openCart}></button>
+
+    <img class="nav-icon" src={userProfileSrc} on:keydown on:click={openProfile} alt="A candid shot of yourself!" />
+
+    {#if sideNav}
+    <div id="sidenav">
+        <button class="icon close" on:click="{closeSideNav}"></button>
+        <ul>
+            <li><a href="/">Collections</a></li>
+            <li><a href="/men">Men</a></li>
+            <li><a href="/women">Women</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </div>
+    {/if}
 </nav>
 
 {:else}
@@ -112,8 +149,12 @@
 
 <!-- This needs to be the product component -->
 <div id="product">
-    <img src={productSrc} alt="A product" />
-
+    <div id="image-viewer">
+        <button class="left-arrow" on:click={scrollLeft}></button>
+        <img src={productSrc} alt="A product" />
+        <button class="right-arrow" on:click={scrollRight}></button>
+    </div>
+    
     <p>{ productCompany }</p>
     <h1>{ product }</h1>
     <p>{ productDescription }</p>
