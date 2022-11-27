@@ -11,6 +11,10 @@
     export let productOriginalPrice: string = '';
     export let productSalePercent: string = '';
 
+    export let userName: string = '';
+    export let userProfileSrc: string = '';
+    export let userCart: any[] = [];
+
     function checkMobile():void {
        isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
     }
@@ -36,8 +40,7 @@
     }
 
     function setProductData(products:any) {
-        // console.log(JSON.stringify(products.products, null, 4));
-        let sneakers = products.products[0];
+        let sneakers = products[0];
         product = sneakers.product;
         productCompany = sneakers.product_company;
         productDescription = sneakers.product_description;
@@ -48,7 +51,10 @@
     } 
 
     function setUserData(users:any) {
-        console.log(users);
+        let user = users[0];
+        userName = user.user_name;
+        userProfileSrc = '/images/' + user.user_profile_image_source;
+        userCart = user.user_cart;
     }
 
     onMount(async () => {
