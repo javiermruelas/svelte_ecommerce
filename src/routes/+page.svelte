@@ -148,28 +148,26 @@
 {/if}
 
 <!-- This needs to be the product component -->
-<div id="product">
-    <div id="image-viewer">
-        <button class="left-arrow" on:click={scrollLeft}></button>
-        <img src={productSrc} alt="A product" />
-        <button class="right-arrow" on:click={scrollRight}></button>
-    </div>
-    
-    <p>{ productCompany }</p>
-    <h1>{ product }</h1>
-    <p>{ productDescription }</p>
+<div id="image-viewer">
+    <button class="left-arrow" on:click={scrollLeft}></button>
+    <img src={productSrc} alt="A product" />
+    <button class="right-arrow" on:click={scrollRight}></button>
+</div>
 
-    <p class="product-price">{ productPrice } <span class="sale-percent">{ productSalePercent }</span></p>
-    <p class="product-original-price">{ productOriginalPrice }</p>
-    
-    <div class="flex-group-row">
-        <div class="product-counter flex-group-row">
-            <button on:click={subtractItem}>-</button>
-            <div>{ itemCounter }</div>
-            <button on:click={addItem}>+</button>
-        </div>
-        <button><span class="icon cart"></span>Add to cart</button>
+<p>{ productCompany }</p>
+<h1>{ product }</h1>
+<p>{ productDescription }</p>
+
+<p class="product-price">{ productPrice } <span class="sale-percent">{ productSalePercent }</span></p>
+<p class="product-original-price">{ productOriginalPrice }</p>
+
+<div class="flex-group-row">
+    <div class="product-counter flex-group-row">
+        <button on:click={subtractItem}>-</button>
+        <div>{ itemCounter }</div>
+        <button on:click={addItem}>+</button>
     </div>
+    <button><span class="icon cart"></span>Add to cart</button>
 </div>
 
 <!-- This needs to go in the footer component -->
